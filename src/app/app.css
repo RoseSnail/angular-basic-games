@@ -1,0 +1,13 @@
+.main{
+  top: 10px;
+  left: 10px;
+  border-style:solid;
+  border-width: 3px;
+  border-color: lightgrey
+}
+
+.fps{
+  margin: 0;
+  float: right;
+  opacity: 0.5;
+}

@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+svg{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.dead{
+  visibility: hidden;
+}

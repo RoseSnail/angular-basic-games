@@ -1,0 +1,6 @@
+@switch (shipType) {
+  @case ('A'){ <app-ship-a #playerShip svgId="player_a" [x]=x() [y]=y() [svgWidth]="svgWidth()" [svgHeight]="svgHeight()"/> }
+  @case ('B'){ <app-ship-b #playerShip svgId="player_b" [x]=x() [y]=y() [svgWidth]="svgWidth()" [svgHeight]="svgHeight()"/> }
+  @case ('X'){ <app-ship-x #playerShip svgId="player_x" [x]=x() [y]=y() [svgWidth]="svgWidth()" [svgHeight]="svgHeight()"/> }
+  @default {   <app-ship-y #playerShip svgId="player_y" [x]=x() [y]=y() [svgWidth]="svgWidth()" [svgHeight]="svgHeight()"/> }
+}

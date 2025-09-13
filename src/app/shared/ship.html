@@ -1,0 +1,17 @@
+<svg [attr.id]='svgId()'
+  [attr.width]='svgWidth()'
+  [attr.height]='svgHeight()'
+  xmlns="http://www.w3.org/2000/svg">
+  
+  @for (offset of offsets; track $index; let idx = $index) {
+    <rect
+      [attr.id]='svgId() + "_rect" + idx'
+      [ngClass]='{"dead": !hitPoints[idx]}'  
+      [attr.x]='calcXPosition(idx) + "px"'
+      [attr.y]='calcYPosition(idx) + "px"'
+      [attr.width]='size * scale'
+      [attr.height]='size * scale'
+      [attr.fill]='color'
+    />
+  }
+</svg>
