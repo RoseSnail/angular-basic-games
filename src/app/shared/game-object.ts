@@ -13,8 +13,31 @@ export class GameObject {
   position = model<Vector2D>();
   x = model(100);
   y = model(100);
-  
-  update(elapsedTime: number){
+
+  update( elapsedTime:number ){
     // the most basic update - useable by all GameObjects that don't override update()
   }
+
+  degreeToRadian( degree:number ){
+    return degree * Math.PI / 180;
+  }
+  radianToDegree( radian:number ){
+    return radian * 180 / Math.PI;
+  }
+  rotatePointAroundAnchor( point:Vector2D, anchor:Vector2D, degree:number ):Vector2D{
+    let rotated = new Vector2D( point.x, point.y );
+    if( degree > 0 ){
+      let radian = this.degreeToRadian( degree );
+      rotated.x = Math.cos(radian) * (point.x - anchor.x) - Math.sin(radian) * (point.y - anchor.y) + anchor.x;
+      rotated.y = Math.sin(radian) * (point.x - anchor.x) + Math.cos(radian) * (point.y - anchor.y) + anchor.y;
+    }
+    return rotated;
+  }
+  
+  // the clockwise angle from vector x=0, y=1.
+  // returns n where 0 <= n < 360
+  calcAngleDegrees( x:number, y:number ){
+    return ((Math.atan2(y, x) * 180) / Math.PI + 90 + 360) % 360;
+  }
+
 }

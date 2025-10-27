@@ -23,7 +23,7 @@ export class ShipA extends Ship{
    * 1 ■ ■ ■ ■ ■
    * 2 ■       ■
   /*/
-  //override up = 0;
+  //override upRotation = 0;
   override offsets: Position[] = [
                                 {x: 0, y:-2},
                   {x:-1, y:-1}, {x: 0, y:-1}, {x: 1, y:-1},

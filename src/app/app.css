@@ -6,8 +6,12 @@
   border-color: lightgrey
 }
 
-.fps{
+.fps-display{
+  text-align: right;
   margin: 0;
   float: right;
   opacity: 0.5;
+}
+.fps{
+  margin: 0;
 }

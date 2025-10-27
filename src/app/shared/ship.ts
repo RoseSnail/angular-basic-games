@@ -12,6 +12,8 @@ import { GameObject } from './game-object';
   styleUrl: './ship.css'
 })
 export class Ship extends GameObject {
+  checked = false;
+
   name = "Base";
   svgId = input("");
   svgWidth = input(920);
@@ -20,12 +22,24 @@ export class Ship extends GameObject {
   //viewBoxWidth = input(800);
   //viewBoxHeight = input(400);
 
-  size = 4; 
+  size = 4;
   scale = 1.5;
   scaledSize(){ return this.size * this.scale; }
   color = 'rgb(255,0,255)';
 
+  //clockwise
+  rotation = 0;
+  rotationSpeed = 0.1;
+  upRotation = 0; //rotation to be applied so the ship is in the "up" position (thrusters down, nose up)
+  getRotation(){
+    return (this.rotation + this.upRotation) % 360;
+  }
+  transformRotateString(){
+    return this.getRotation().toFixed(5) + " " + this.x().toFixed(5) + " " + this.y().toFixed(5);
+  }
+
   health = 1;
+  pixelHealth: number[] = [];
   hitPoints: boolean[] = [];
   maxHealth(): number { return this.offsets.length; }
   offsets: Position[] = [{ x:0, y:0 }];
@@ -38,13 +52,12 @@ export class Ship extends GameObject {
   //velocity: Position = { x:0.2, y:1 };
   velocity: Vector2D = new Vector2D(0,0);
   desiredVelocity: Vector2D = new Vector2D(0,0);
-  
+
   // how many seconds it takes to fully accelerate / decelerate
   acceleration = 1.0;
   deceleration = 0.2;
-  
-  up = 0; //rotation to be applied so the ship is in the "up" position (thrusters down, nose up)
-  
+
+
   calcXPosition(offset:number): number{
     return (this.x() + this.offsets[offset].x * this.scaledSize());
   }
@@ -87,6 +100,7 @@ export class Ship extends GameObject {
   
   override update(elapsedTime: number = 0){
     this.move(this.velocity.x * this.maxSpeed * elapsedTime, this.velocity.y * this.maxSpeed * elapsedTime);
+    this.rotation += this.rotationSpeed * elapsedTime;
   }
 
   move( x: number, y: number ){
@@ -112,6 +126,37 @@ export class Ship extends GameObject {
   
   faceUp(){
     
+  }
+  
+  collideWithShip( other:Ship ): boolean {
+    let shipPos = new Vector2D( this.x(), this.y() );
+    let shipRot = this.getRotation();
+    let shipScale = this.scaledSize();
+
+    let otherPos = new Vector2D( other.x(), other.y() );
+    let otherRot = other.getRotation();
+    let otherScale = other.scaledSize();
+
+    let collisionDistance = this.scaledSize() + other.scaledSize();
+    let endLoop = false;
+    this.offsets.some(( offset, idx )=>{
+      if( this.hitPoints[idx] ){
+        let point = this.rotatePointAroundAnchor( new Vector2D(shipPos.x + offset.x * shipScale, shipPos.y + offset.y * shipScale), shipPos, shipRot );
+        other.offsets.some(( otherOffset, otherIdx )=>{
+          if(other.hitPoints[otherIdx] && point.magnitudeFromOther(this.rotatePointAroundAnchor( new Vector2D(otherPos.x + otherOffset.x * otherScale, otherPos.y + otherOffset.y * otherScale), otherPos, otherRot )) < collisionDistance){
+            this.hitPoints[idx] = false;
+            this.health--;
+            other.hitPoints[otherIdx] = false;
+            other.health--;
+            endLoop = true;
+          }
+          return endLoop;
+        });
+      }
+      return endLoop;
+    });
+
+    return endLoop;
   }
 
 }

@@ -1,12 +1,15 @@
 <main class="main" [ngStyle]='{"width":calcSvgWidth()-2 + "px", "height":calcSvgHeight()-2 + "px" }'>
-  <p class="fps">{{ framesCompleted() | number:'1.0-0' }} : fps</p>
+  <div class="fps-display">
+    <p class="fps">{{ framesCompleted() | number:'1.0-0' }} : fps</p>
+    <p class="fps">avg {{ fpsAverage() | number:'1.0-0' }} : fps</p>
+    <p class="fps">min  {{ fpsMin() | number:'1.0-0' }} : fps</p>
+  </div>
   <app-player #player [svgWidth]="calcSvgWidth()-20" [svgHeight]="windowHeight()-20"/>
   
   <app-ship-a #ship #a [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-a #ship #a [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-a #ship #a [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-a #ship #a [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
-  <!--
   <app-ship-a #ship #a [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-a #ship #a [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-a #ship #a [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
@@ -19,7 +22,7 @@
   <app-ship-a #ship #a [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-a #ship #a [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-a #ship #a [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
-  -->
+
   <app-ship-b #ship #b [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-b #ship #b [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-b #ship #b [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
@@ -38,6 +41,7 @@
   <app-ship-b #ship #b [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-b #ship #b [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-b #ship #x [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
+
   <app-ship-x #ship #x [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-x #ship #x [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-x #ship #x [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
@@ -53,6 +57,7 @@
   <app-ship-x #ship #x [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-x #ship #x [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-x #ship #x [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
+
   <app-ship-y #ship #y [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-y #ship #y [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>
   <app-ship-y #ship #y [svgWidth]="calcSvgWidth()" [svgHeight]="calcSvgHeight()"/>

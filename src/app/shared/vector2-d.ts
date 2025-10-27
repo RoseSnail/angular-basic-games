@@ -1,6 +1,10 @@
 export class Vector2D {
   constructor( public x: number = 0, public y: number = 0 ){}
 
+  magnitudeFromOther(other:Vector2D): number {
+    return Math.sqrt((this.x - other.x)*(this.x - other.x) + (this.y - other.y)*(this.y - other.y));
+  }
+
   magnitude(): number {
     return Math.sqrt( this.x * this.x + this.y * this.y );
   }

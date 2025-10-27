@@ -25,7 +25,8 @@ export class ShipB extends Ship {
    * 1  ■     ■
    * 2  ■ ■ ■
   /*/
-  override up = 270;
+  //override upRotation = -90;
+  override upRotation = 270;
   override offsets: Position[] = [
     {x:-1.5, y:-2.5}, {x:-0.5, y:-2.5},
     {x:-1.5, y:-1.5},                   {x:0.5, y:-1.5},
